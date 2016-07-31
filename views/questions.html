@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>BehindCoffee</title>
+		<include href="blocks/head.html" />
+	</head>
+	<body>
+		<include href="blocks/nav.html" />
+
+		<div class="main">
+			<div class="container">
+				<div class="box">
+					<check if="{{ @page_content.items }}">
+						<div class="block entries">
+							<repeat group="{{ @page_content.items }}" key="{{ @key }}" value="{{ @post }}">
+								<div class="entry" id="question-{{ @post.id }}">
+									<a class="title" href="/question/{{ @post.id }}/">{{ @post.title }}</a>
+									<div class="meta">
+										<span><time datetime="{{ @post.date_created }}" title="{{ @post.date_created | dateTime }}">{{ @post.date_created | shortTimeSince }}</time></span>
+										<span><a href="/user/{{ @post.author.username }}">@{{ @post.author.username }}</a></span>
+									</div>
+								</div>
+							</repeat>
+						</div>
+						<false>
+							<div class="block">
+								<div class="alert alert-info">
+									You have reached the end of the list. There are no more items to display. In order to
+									keep things relevant, we only show latest 1,000 questions. While older quesitons are
+									still accessible, they may not appear in the listing.
+								</div>
+							</div>
+						</false>
+					</check>
+					<check if="{{ @page_content.items }}">
+						<div class="load-more">
+							<a class="btn load-more-btn" href="?next={{ @page_content.next }}">Load more...</a>
+						</div>
+					</check>
+				</div>
+
+				<include href="blocks/footer.html" />
+			</div>
+		</div>
+	</body>
+</html>

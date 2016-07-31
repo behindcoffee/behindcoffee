@@ -1,0 +1,11 @@
+<div class="footer">
+    <span><strong>&copy; 2016 BehindCoffee.com</strong></span>
+    <span><a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/etiquette.md">Etiquette</a></span>
+    <check if="{{ @G.user }}">
+        <span>Logged in as <strong>{{ @G.user.username }}</strong></span>
+        <span><a href="/logout">Logout</a></span>
+        <false>
+            <span><a href="/login">Login or Register</a></span>
+        </false>
+    </check>
+</div>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Profile | BehindCoffee</title>
+		<include href="blocks/head.html" />
+	</head>
+	<body>
+		<include href="blocks/nav.html" />
+
+		<div class="main">
+			<div class="container">
+                <check if="{{ @GET.success }}">
+                    <div class="block">
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Profile has been updated.
+                        </div>
+                    </div>
+                </check>
+                <check if="{{ @errors }}">
+                    <div class="block">
+                        <div class="alert alert-danger">
+                            <strong>Errors:</strong>&nbsp;
+                            <repeat group="{{ @errors }}" value="{{ @error }}">
+                                {{ @error }}
+                            </repeat>
+                        </div>
+                    </div>
+                </check>
+				<div class="box profile-box">
+					<div class="block">
+	                    <form action="/profile" method="post">
+                            <h3>Profile</h3><br />
+                            <div class="box">
+                                <p>
+                                    For security reasons, to make any changes to your profile, you must provide your current password.
+                                </p>
+                                <fieldset class="form-group">
+    	                            <input class="form-control" type="password" name="current_password" value="" placeholder="Current Password">
+                                    <small class="text-muted">Please provide your current account password.</small>
+    	                        </fieldset>
+                            </div>
+                            <div class="box">
+                                <p>
+                                    Next, make changes to your account. Your full name, username and about me section will be publicly viewable.
+                                </p>
+    	                        <fieldset class="form-group">
+    	                            <input class="form-control" type="text" name="full_name" value="{{ @profile.full_name }}" placeholder="Full Name">
+    	                        </fieldset>
+                                <fieldset class="form-group">
+    	                            <input class="form-control" type="text" name="username" value="{{ @profile.username }}" placeholder="Username" disabled="disabled">
+                                    <small class="text-muted">Your username cannot be changed.</small>
+    	                        </fieldset>
+    	                        <fieldset class="form-group">
+    	                            <textarea class="form-control" name="about" rows="4" placeholder="About me...">{{ @profile.about }}</textarea>
+                                    <small class="text-muted">Tell everyone a little about you.</small>
+    	                        </fieldset>
+                                <fieldset class="form-group">
+    	                            <input class="form-control" type="email" name="email" value="{{ @profile.email }}" placeholder="Email">
+    	                        </fieldset>
+                            </div>
+                            <div class="box">
+                                <p>
+                                    If you wish to change your password, type it into the below box and then confirm it.
+                                </p>
+                                <fieldset class="form-group">
+    	                            <input class="form-control" type="password" name="new_password" value="" placeholder="New password">
+                                    <small class="text-muted">Password must be <strong>between {{ @rules.min_password_length }} and {{ @rules.max_password_length }} characters</strong>.</small>
+    	                        </fieldset>
+                                <fieldset class="form-group">
+    	                            <input class="form-control" type="password" name="new_password_confirm" value="" placeholder="Confirm new password">
+                                    <small class="text-muted">Confirm your new password.</small>
+    	                        </fieldset>
+                            </div>
+	                        <button type="submit" class="btn btn-primary">Update</button>
+	                    </form>
+					</div>
+				</div>
+				<include href="blocks/footer.html" />
+			</div>
+		</div>
+	</body>
+</html>

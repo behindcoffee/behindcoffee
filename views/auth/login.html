@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Log In or Register</title>
+		<include href="blocks/head.html" />
+	</head>
+	<body>
+		<include href="blocks/nav.html" />
+
+		<div class="main">
+			<div class="container">
+				<div class="block">
+	                <div class="row">
+						<check if="{{ @GET.required }}">
+	                        <div class="col-md-12">
+	                            <div class="alert alert-warning">
+									<strong>Attention!</strong> You must be signed in to access this page. Please log in first.
+	                            </div>
+	                        </div>
+	                    </check>
+						<check if="{{ @GET.registered }}">
+	                        <div class="col-md-12">
+	                            <div class="alert alert-success">
+	                                <strong>Success!</strong> Your account was registered. You may now log in.
+	                            </div>
+	                        </div>
+	                    </check>
+	                    <check if="{{ @errors }}">
+	                        <div class="col-md-12">
+	                            <div class="alert alert-danger">
+	                                <strong>Errors:</strong>&nbsp;
+	                                <repeat group="{{ @errors }}" value="{{ @error }}">
+	                                    {{ @error }}
+	                                </repeat>
+	                            </div>
+	                        </div>
+	                    </check>
+	                    <div class="col-md-6">
+	                        <div class="box block">
+	                            <h4>Create a New Account</h4><br />
+	                            <form action="/login" method="post" autocomplete="off">
+	                                <fieldset class="form-group">
+	                                    <input class="form-control" type="text" name="full_name" value="{{ @post.full_name }}" placeholder="Your Full Name" autocapitalize="on">
+	                                </fieldset>
+	                                <fieldset class="form-group">
+	                                    <input class="form-control" type="text" name="username" value="{{ @post.username }}" placeholder="Choose a Username" spellcheck="false">
+	                                    <small class="text-muted">Once a username is chosen, it cannot be changed.</small>
+	                                </fieldset>
+	                                <fieldset class="form-group">
+	                                    <input class="form-control" type="password" name="password" value="{{ @post.password }}" placeholder="Password">
+	                                </fieldset>
+	                                <fieldset class="form-group">
+	                                    <input class="form-control" type="password" name="password_confirmation" value="{{ @post.password_confirmation }}" placeholder="Confirm Password">
+	                                </fieldset>
+	                                <fieldset class="form-group">
+	                                    <input class="form-control" type="email" name="email" value="{{ @post.email }}" placeholder="Email Address">
+	                                    <small class="text-muted">Your email address will be used only in case we need to get in touch with you.</small>
+	                                </fieldset>
+	                                <button type="submit" name="register" class="btn btn-primary">Register</button>
+	                            </form>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="box block">
+	                            <h4>Log In</h4><br />
+	                            <form method="post" autocomplete="off" spellcheck="false">
+	                                <fieldset class="form-group">
+	                                    <input class="form-control" type="text" name="username" value="{{ @post.username }}" placeholder="Enter Username" autofocus>
+	                                </fieldset>
+	                                <fieldset class="form-group">
+	                                    <input class="form-control" type="password" name="password" value="{{ @post.password }}" placeholder="Your Password">
+	                                </fieldset>
+	                                <button type="submit" name="login" class="btn btn-primary">Log In</button>
+	                            </form>
+	                        </div>
+	                    </div>
+					</div>
+	                <small class="text-muted">By signing up, you agree to our Terms of Service, Privacy and Content policies.</small>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

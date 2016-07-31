@@ -1,0 +1,7 @@
+{
+    "require": {
+        "bcosca/fatfree": "3.5.0",
+        "sendgrid/sendgrid": "~4.0",
+        "cebe/markdown": "~1.0.1"
+    }
+}

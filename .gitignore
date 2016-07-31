@@ -1,0 +1,6 @@
+.DS_Store
+install.php
+app/config/production.ini
+tmp/*
+log/*
+vendor/*

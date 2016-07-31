@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{{ @post.title }} | BehindCoffee</title>
+		<include href="blocks/head.html" />
+	</head>
+	<body>
+		<include href="blocks/nav.html" />
+
+		<div class="main">
+			<div class="container">
+					<div class="block">
+						<div class="question">
+							<div class="title">
+								{{ @post.title }}
+							</div>
+							<div class="meta">
+								<span><time datetime="{{ @post.date_created }}" title="{{ @post.date_created | dateTime }}">{{ @post.date_created | shortTimeSince }}</time></span>
+								<span><a href="/user/{{ @post.author.username }}">@{{ @post.author.username }}</a></span>
+							</div>
+						</div>
+	                    <div class="composer">
+							<div class="alert alert-info">
+								Before posting, familiarize yourself with our <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/etiquette.md">etiquette</a>. Read through possible <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/formatting.md">formatting options</a>.
+							</div>
+	                        <check if="{{ @errors }}">
+	                            <div class="alert alert-danger">
+	                                <repeat group="{{ @errors }}" value="{{ @error }}">
+	                                    {{ @error }}
+	                                </repeat>
+	                            </div>
+	                        </check>
+	                        <form action="" method="post">
+	                            <input type="hidden" name="item" value="{{ @post.id }}">
+	                            <input type="hidden" name="back" value="/question/{{ @post.id }}">
+	                            <textarea class="form-control" name="body" rows="6" cols="40" placeholder="Type your answer here." autofocus>{{ @text }}</textarea>
+	                            <div class="links">
+									<span><button class="btn btn-secondary" type="submit" name="comment">Submit Answer</button></span>
+	                            </div>
+	                        </form>
+	                    </div>
+					</div>
+
+				<include href="blocks/footer.html" />
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="header clearfix">
+    <nav class="navbar">
+        <div class="container">
+            <ul id="navigation-links" class="nav navbar-nav">
+                <li class="nav-item"><a class="nav-link nav-logo-link" href="/"><i class="fa fa-comments-o"></i>&nbsp;&nbsp;BehindCoffee</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Recent</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ask">Ask Question</a></li>
+                <check if="{{ @G.user }}">
+                    <li class="nav-item"><a class="nav-link" href="/profile">Me</a></li>
+                    <false>
+                        <li class="nav-item"><a class="nav-link signin-link" href="/login">Sign in</a></li>
+                    </false>
+                </check>
+            </ul>
+        </div>
+    </nav>
+</div>
