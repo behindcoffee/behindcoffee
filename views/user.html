@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ @user.username }} | BehindCoffee</title>
+    <include href="blocks/head.html" />
+  </head>
+  <body>
+    <include href="blocks/nav.html" />
+
+    <div class="main">
+      <div class="container">
+        <check if="{{ @GET.success }}">
+          <div class="block">
+            <div class="alert alert-success">
+              <strong>Success!</strong> Profile has been updated.
+            </div>
+          </div>
+        </check>
+        <check if="{{ @errors }}">
+          <div class="block">
+            <div class="alert alert-danger">
+              <strong>Errors:</strong>&nbsp;
+              <repeat group="{{ @errors }}" value="{{ @error }}">
+                {{ @error }}
+              </repeat>
+            </div>
+          </div>
+        </check>
+        <div class="box profile-box">
+          <div class="block">
+              <h3>{{ @user.full_name }}</h3>
+              <div class="box">
+                <div class="meta">
+                  <span>@{{ @user.username }}</span>
+                  <span>Registered {{ @user.date_created | shortDate }}</span>
+                </div>
+                <p>
+                  {{ @user.about }}
+                </p>
+              </div>
+          </div>
+        </div>
+        <include href="blocks/footer.html" />
+      </div>
+    </div>
+  </body>
+</html>

@@ -4,3 +4,4 @@ app/config/production.ini
 tmp/*
 log/*
 vendor/*
+.#*
