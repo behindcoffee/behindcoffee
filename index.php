@@ -15,6 +15,10 @@ $f3->set("site.url", $f3->get("SCHEME") . "://" . $f3->get("HOST") . $f3->get("B
 // Initialize the app
 $f3->config(sprintf("app/config/%s.ini", $env));
 
+// Load password dictionary
+// $password_dict = file_get_contents("app/data/passwords.dat");
+// $f3->set("G.common_password", $password_dict);
+
 // Define routes
 $f3->config('app/routes.ini');
 

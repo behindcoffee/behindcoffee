@@ -9,71 +9,64 @@
 
 		<div class="main">
 			<div class="container">
-				<div class="box">
-					<div class="block">
-						<check if="{{ @GET.replied }}">
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Thank you for your reply.
-                            </div>
-	                    </check>
-						<div class="question">
-							<div class="title">
-								{{ @post.title }}
-							</div>
-							<div class="meta">
-								<span title="Posted by @{{ @post.author.username }}">@{{ @post.author.username }}</span>
-								<span title="Posted {{ @post.date_created | shortDate }}">{{ @post.date_created | shortTimeSince }}</span>
-							</div>
-							<check if="{{ @post.body }}">
-								{{ @post.body | raw }}
-							</check>
-							<div class="links">
-								<span><a class="btn btn-link" href="/answer/{{ @post.id }}">Answer</a></span>
-							</div>
-						</div>
-					</div>
 
-					<div class="block">
-						<div class="answers">
-							<h3>Discussion</h3>
-							<check if="{{ @comments }}">
-								<repeat group="{{ @comments }}" value="{{ @comment }}">
-									<div class="answer" id="answer-{{ @comment.id }}">
-										<div class="meta">
-											<span>Answered by @{{ @comment.author.username }}</span>
-											<span>{{ @comment.date_created | shortTimeSince }}</span>
-										</div>
-										{{ @comment.body | raw }}
-										<div class="links">
-											<span><a href="/reply/{{ @comment.id }}">Reply</a></span>
-											<span><a href="/report?answer={{ @comment.id }}">Report</a></span>
-										</div>
-										<repeat group="{{ @comment.replies }}" value="{{ @reply }}">
-											<div class="reply" id="reply-{{ @reply.id }}">
-												<div class="meta">
-													<span>Replied by @{{ @reply.author.username }}</span>
-													<span>{{ @reply.date_created | shortTimeSince }}</span>
-												</div>
-												{{ @reply.body | raw }}
-												<div class="links">
-													<span><a href="/report?reply={{ @reply.id }}">Report</a></span>
-												</div>
-											</div>
-										</repeat>
-									</div>
-								</repeat>
-								<false>
-									<tr>
-										<td>There are no comments.</td>
-									</tr>
-								</false>
-							</check>
-						</div>
-					</div>
-				</div>
+				<check if="{{ @GET.replied }}">
+                    <p class="success">
+                        <strong>Success!</strong> Thank you for your reply.
+                    </p>
+                </check>
+
+				<table>
+					<tr>
+						<td class="meta">
+							{{ @post.date_created | shortTimeSince }}
+							by <a href="/user/{{ @post.author.username }}">{{ @post.author.username }}</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="title">
+							{{ @post.title }}
+						</td>
+					</tr>
+					<check if="{{ @post.body }}">
+						<tr>
+							<td>
+								{{ @post.body | raw }}
+							</td>
+						</tr>
+					</check>
+					<tr>
+						<td class="links">
+							<a class="" href="/answer/{{ @post.id }}" rel="nofollow">+ Respond</a>
+						</td>
+					</tr>
+				</table>
+
+				<br /><br />
+
+				<h3>Discussion</h3>
+				<check if="{{ @comments }}">
+
+					<table class="discussion">
+						<repeat group="{{ @comments }}" value="{{ @response }}">
+							<tr>
+								<td>
+									<include href="blocks/response.html" />
+								</td>
+							</tr>
+						</repeat>
+					</table>
+
+					<false>
+						<tr>
+							<td>There are no comments.</td>
+						</tr>
+					</false>
+				</check>
 
 				<include href="blocks/footer.html" />
 
+				</div>
 			</div>
 		</div>
 	</body>

@@ -6,20 +6,25 @@ class Comment extends Record {
 
     protected $table_name = "comment";
 
-    public function add($post, $parent, $author, $body)
+    public function add($post, $parent, $author, $body, $format = true)
     {
-
-        // Formatter for body
-        $parser = new \Helper\Cappuchino;
-        $formatted_body = $parser->parse($body);
 
         // Create post
         $obj = array(
             'post_id'   => $post["id"],
             'parent_id' => $parent["id"],
-            'author_id' => $author["id"],
-            'body'      => $formatted_body
+            'author_id' => $author["id"]
         );
+
+        // Formatter for body
+        if ($format) {
+            $parser = new \Helper\Cappuchino;
+            $formatted_body = $parser->parse($body);
+
+            $obj['body'] = $formatted_body;
+        } else {
+            $obj['body'] = $body;
+        }
 
         $post = self::create($obj);
 
@@ -44,5 +49,5 @@ class Comment extends Record {
 
         return $comments;
     }
-    
+
 }

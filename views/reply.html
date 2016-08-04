@@ -9,37 +9,41 @@
 
 		<div class="main">
 			<div class="container">
-					<div class="block">
-						<div class="answer">
-							<div class="body">
-								{{ @comment.body | raw }}
-							</div>
-                            <div class="meta">
-                                <span>{{ @comment.date_created | shortTimeSince }}</span>
-                            </div>
-						</div>
 
-	                    <div class="composer">
-							<div class="alert alert-info">
-								Before posting, familiarize yourself with our <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/etiquette.md">etiquette</a>. Read through possible <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/formatting.md">formatting options</a>.
-							</div>
-	                        <check if="{{ @errors }}">
-	                            <div class="alert alert-danger">
-	                                <repeat group="{{ @errors }}" value="{{ @error }}">
-	                                    {{ @error }}
-	                                </repeat>
-	                            </div>
-	                        </check>
-	                        <form action="" method="post">
-	                            <input type="hidden" name="item" value="{{ @comment.id }}">
-	                            <input type="hidden" name="back" value="/question/{{ @post.id }}">
-	                            <textarea class="form-control" name="body" rows="3" cols="40" placeholder="Type your reply here." autofocus>{{ @text }}</textarea>
-	                            <div class="links">
-									<span><button class="btn btn-secondary" type="submit" name="comment">Reply</button></span>
-	                            </div>
-	                        </form>
-	                    </div>
-					</div>
+				<check if="{{ @errors }}">
+					<p class="error">
+						<strong>Error:</strong>
+						<repeat group="{{ @errors }}" value="{{ @error }}">
+							{{ @error }}
+						</repeat>
+					</p>
+				</check>
+
+				<form action="" method="post">
+					<table>
+						<tr>
+							<td class="meta">
+								<a href="/question/{{ @comment.post_id }}">&lsaquo; back</a> &ndash;
+								{{ @comment.date_created | shortTimeSince }}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ @comment.body | raw }}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<textarea name="body" rows="2" cols="40" placeholder="Add your comment..." autofocus>{{ @text }}</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" name="comment">Comment</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 
 				<include href="blocks/footer.html" />
 			</div>

@@ -1,0 +1,16 @@
+<table class="comments">
+    <check if="{{ @response.replies }}">
+        <repeat group="{{ @response.replies }}" value="{{ @comment }}">
+            <tr>
+                <td class="comment">
+                    {{ @comment.body }} &ndash; <a href="/user/{{ @comment.author.username }}">{{ @comment.author.username }}</a> <timestamp>{{ @comment.date_created | shortTimeSince }}</timestamp>
+                </td>
+            </tr>
+        </repeat>
+    </check>
+    <tr>
+        <td class="comment">
+            <a href="/reply/{{ @response.id }}">add a comment</a>
+        </td>
+    </tr>
+</table>

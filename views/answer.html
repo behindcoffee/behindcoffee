@@ -9,37 +9,46 @@
 
 		<div class="main">
 			<div class="container">
-					<div class="block">
-						<div class="question">
-							<div class="title">
-								{{ @post.title }}
-							</div>
-							<div class="meta">
-								<span><time datetime="{{ @post.date_created }}" title="{{ @post.date_created | dateTime }}">{{ @post.date_created | shortTimeSince }}</time></span>
-								<span><a href="/user/{{ @post.author.username }}">@{{ @post.author.username }}</a></span>
-							</div>
-						</div>
-	                    <div class="composer">
-							<div class="alert alert-info">
-								Before posting, familiarize yourself with our <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/etiquette.md">etiquette</a>. Read through possible <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/formatting.md">formatting options</a>.
-							</div>
-	                        <check if="{{ @errors }}">
-	                            <div class="alert alert-danger">
-	                                <repeat group="{{ @errors }}" value="{{ @error }}">
-	                                    {{ @error }}
-	                                </repeat>
-	                            </div>
-	                        </check>
-	                        <form action="" method="post">
-	                            <input type="hidden" name="item" value="{{ @post.id }}">
-	                            <input type="hidden" name="back" value="/question/{{ @post.id }}">
-	                            <textarea class="form-control" name="body" rows="6" cols="40" placeholder="Type your answer here." autofocus>{{ @text }}</textarea>
-	                            <div class="links">
-									<span><button class="btn btn-secondary" type="submit" name="comment">Submit Answer</button></span>
-	                            </div>
-	                        </form>
-	                    </div>
-					</div>
+				<check if="{{ @errors }}">
+					<p class="error">
+						<strong>Error:</strong>
+						<repeat group="{{ @errors }}" value="{{ @error }}">
+							{{ @error }}
+						</repeat>
+					</p>
+				</check>
+				<form action="" method="post">
+					<table>
+						<tr>
+							<td class="meta">
+								<a href="/question/{{ @post.id }}">&lsaquo; back</a> &ndash;
+								{{ @post.date_created | shortTimeSince }}
+								by <a href="/user/{{ @post.author.username }}">{{ @post.author.username }}</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="title">{{ @post.title }}</td>
+						</tr>
+						<check if="{{ @post.body }}">
+							<tr>
+								<td>{{ @post.body | raw }}</td>
+							</tr>
+						</check>
+						<tr>
+							<td><textarea name="body" rows="6" cols="40" placeholder="Your response..." autofocus>{{ @text }}</textarea></td>
+						</tr>
+						<tr>
+							<td>
+								<p>Before posting, familiarize yourself with our <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/etiquette.md">etiquette</a>. Read through possible <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/formatting.md">formatting options</a>.</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button class="btn btn-secondary" type="submit" name="comment">Submit Answer</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 
 				<include href="blocks/footer.html" />
 			</div>

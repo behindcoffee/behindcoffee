@@ -1,0 +1,22 @@
+<table class="response" id="response-{{ @response.id }}">
+    <tr>
+        <td>
+            <tr>
+                <td class="meta">
+                    {{ @response.date_created | shortTimeSince }} by
+                    <a href="/user/{{ @response.author.username }}">{{ @response.author.username }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="body">
+                    {{ @response.body | raw }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <include href="blocks/comments.html" />
+                </td>
+            </tr>
+        </td>
+    </tr>
+</table>

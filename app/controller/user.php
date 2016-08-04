@@ -16,14 +16,18 @@ class User extends \Resource {
             if (empty($user)) {
                 throw new NotFound;
             }
-            
+
+            $posts_model = new \Model\Post();
+            $posts = $posts_model->list_by("author_id", $user["id"]);
+            // var_dump($posts);
+
             $f3->set("user", $user);
             $this->render("user.html");
         } catch (NotFound $e) {
             $this->render("errors/404.html");
         }
     }
-    
+
     public function profile($f3)
     {
 
@@ -35,7 +39,7 @@ class User extends \Resource {
             $user_model = new \Model\User();
             $user = $user_model->get_by_id(array($f3->get("G.user.id")));
             $user = $user[$f3->get("G.user.id")];
-            
+
             $post = $f3->get("POST");
             if ($post) {
 

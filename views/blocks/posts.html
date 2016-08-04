@@ -1,0 +1,10 @@
+<table class="posts">
+    <repeat group="{{ @page_content.items }}" key="{{ @key }}" value="{{ @post }}">
+        <include href="blocks/post.html" />
+    </repeat>
+    <tr>
+        <td class="post">
+            <a class="title" href="?next={{ @page_content.next }}" rel="nofollow">show more...</a>
+        </td>
+    </tr>
+</table>

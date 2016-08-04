@@ -25,10 +25,10 @@ class Comment extends \Resource {
         );
     }
 
-    private function add_comment($author, $post, $parent, $body, $ip)
+    private function add_comment($author, $post, $parent, $body, $ip, $format = true)
     {
         $model = new \Model\Comment();
-        $new_comment = $model->add($post, $parent, $author, $body);
+        $new_comment = $model->add($post, $parent, $author, $body, $format);
 
         return $new_comment;
     }
@@ -132,8 +132,8 @@ class Comment extends \Resource {
                 }
 
                 if (empty($errors)) {
-                    $reply_id = $this->add_comment($f3->get("G.user"), $post, $comment, $post_params["body"], $f3->get("IP"));
-                    $f3->reroute("/question/" . $post["id"] . "?replied=true#answer-" . $comment["id"]);
+                    $reply_id = $this->add_comment($f3->get("G.user"), $post, $comment, $post_params["body"], $f3->get("IP"), false);
+                    $f3->reroute("/question/" . $post["id"] . "?replied=true#response-" . $comment["id"]);
                 } else {
                     $f3->set("text", $post_params["body"]);
                     $f3->set("errors", $errors);

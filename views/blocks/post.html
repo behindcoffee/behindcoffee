@@ -1,0 +1,9 @@
+<tr>
+    <td class="post" id="post-{{ @post.id }}">
+        <a class="title" href="/question/{{ @post.id }}/">{{ @post.title }}</a>
+        <div class="meta">
+            <time datetime="{{ @post.date_created }}" title="{{ @post.date_created | dateTime }}">{{ @post.date_created | shortTimeSince }}</time> by
+            <a href="/user/{{ @post.author.username }}">{{ @post.author.username }}</a>
+        </div>
+    </td>
+</tr>

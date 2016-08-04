@@ -4,43 +4,53 @@
 		<title>Ask | BehindCoffee</title>
 		<include href="blocks/head.html" />
 	</head>
-	<body>
+	<body class="ask">
 		<include href="blocks/nav.html" />
 
 		<div class="main">
 			<div class="container">
-				<div class="box ask-box">
-					<div class="block">
-	                    <h4>Ask Question</h4><br />
-	                    <check if="{{ @errors }}">
-	                        <div class="alert alert-danger">
-	                            <strong>Errors:</strong>&nbsp;
-	                            <repeat group="{{ @errors }}" value="{{ @error }}">
-	                                {{ @error }}
-	                            </repeat>
-	                        </div>
-	                    </check>
-	                    <form action="/ask" method="post">
-	                        <fieldset class="form-group">
-	                            <input class="form-control" type="text" name="title" value="{{ @post.title }}" placeholder="Title" autofocus>
-	                            <small class="text-muted">Title is required and should be concrete, descriptive and to the point. You can expand further in body text.</small>
-	                        </fieldset>
-	                        <fieldset class="form-group">
-	                            <textarea class="form-control" name="body" rows="4" placeholder="Body Text">{{ @post.body }}</textarea>
-	                            <small class="text-muted">
-									Text is an optional field. It should be used to expand on the question title.
-									View our <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/formatting.md">formatting help page</a> to see some of the formatting options.
-								</small>
-	                        </fieldset>
-	                        <fieldset class="form-group">
-	                            <div class="alert alert-info">
-	                                Please make yourself acquanted with our content policy and practice <a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/etiquette.md">good etiquette</a>.
-	                            </div>
-	                        </fieldset>
-	                        <button type="submit" class="btn btn-primary">Submit</button>
-	                    </form>
-					</div>
-				</div>
+
+                <check if="{{ @errors }}">
+                    <p class="error">
+                        <strong>Error:</strong>
+                        <repeat group="{{ @errors }}" value="{{ @error }}">
+                            {{ @error }}
+                        </repeat>
+                    </p>
+                </check>
+
+				<form action="/ask" method="post">
+					<table>
+						<tr>
+							<td>
+								<p>Please read through
+									<a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/etiquette.md">our guidelines</a> and
+									<a href="https://github.com/behindcoffee/behindcoffee-docs/blob/master/formatting.md">formatting options</a> before posting.</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Please remember:
+								<ul>
+									<li>Be concrete, descriptive and to the point.</li>
+									<li>No petitions, funderaisers, crowdfunding campaigns.</li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="text" name="title" value="{{ @post.title }}" placeholder="Question" autofocus></td>
+						</tr>
+						<tr>
+							<td><textarea name="body" rows="8" placeholder="Body (optional)">{{ @post.body }}</textarea></td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+
 				<include href="blocks/footer.html" />
 			</div>
 		</div>

@@ -1,17 +1,15 @@
-<div class="header clearfix">
-    <nav class="navbar">
-        <div class="container">
-            <ul id="navigation-links" class="nav navbar-nav">
-                <li class="nav-item"><a class="nav-link nav-logo-link" href="/"><i class="fa fa-comments-o"></i>&nbsp;&nbsp;BehindCoffee</a></li>
-                <li class="nav-item"><a class="nav-link" href="/">Recent</a></li>
-                <li class="nav-item"><a class="nav-link" href="/ask">Ask Question</a></li>
-                <check if="{{ @G.user }}">
-                    <li class="nav-item"><a class="nav-link" href="/profile">Me</a></li>
-                    <false>
-                        <li class="nav-item"><a class="nav-link signin-link" href="/login">Sign in</a></li>
-                    </false>
-                </check>
-            </ul>
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <a class="nav-link nav-logo-link" href="/">BehindCoffee</a>
+            <a class="nav-link nav-newest" href="/">Newest</a>
+            <a class="nav-link nav-ask" href="/ask" rel="nofollow">Ask</a>
+            <check if="{{ @G.user }}">
+                <a class="nav-link nav-profile" href="/profile" rel="nofollow">Profile</a>
+                <false>
+                    <a class="nav-link nav-login" href="/login" rel="nofollow">Login</a>
+                </false>
+            </check>
         </div>
-    </nav>
+    </div>
 </div>
